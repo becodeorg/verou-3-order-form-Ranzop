@@ -22,16 +22,18 @@ session_start();
 // Use this function when you need to have an overview of these variables
 function whatIsHappening() {
     echo '<h2>$_GET</h2>';
-    var_dump($_GET);
+    pre_r($_GET);
     echo '<h2>$_POST</h2>';
-    var_dump($_POST);
+    pre_r($_POST);
     echo '<h2>$_COOKIE</h2>';
-    var_dump($_COOKIE);
+    pre_r($_COOKIE);
     echo '<h2>$_SESSION</h2>';
-    var_dump($_SESSION);
+    pre_r($_SESSION);
 }
 
 whatIsHappening();
+
+
 
 function pre_r($array) {
     echo "<pre>";
@@ -66,29 +68,28 @@ $products = [
 ];
 
 
-
-/* $arr=array(array("name"=>"neeraj","mob"=>342353534),
-           array("name"=>"rohit","mob"=>34235),
-           array("name"=>"deepak","mob"=>33534)
-          ); */
-
-echo '<table border="2">';
-echo '<tr>';
-echo '<td align="center">Name:</td>';
-echo '<td align="center">Fee:</td>';
-foreach($products as $k)
+// This function will display the contents of the multidimensional/associative array.
+/* foreach($products as $product)
 {
-echo '<tr>';
- foreach($k as $v)
+
+ foreach($product as $content)
 {
-echo '<td align="center">'.$v.'</td>';
+echo $content ;
 }
-echo '</tr>';
+
+} */
+
+
+
+
+// TODO: Show an order confirmation when the user submits the form. This should contain the chosen products and delivery address.
+
+
+if (empty($_GET)){
 }
-echo '</table>';
+else if (!empty($_GET)){
 
-
-
+};
 
 /* echo $products['name']; */
 

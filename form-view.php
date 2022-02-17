@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" type="text/css"
           rel="stylesheet"/>
-    <title>Your fancy store</title>
+    <title>Party Catalogue</title>
 </head>
 <body>
 <div class="container">
@@ -71,10 +71,13 @@
             <?php endforeach; ?>
         </fieldset>
 
-        <button type="submit" class="btn btn-primary">Order!</button>
+        <button type="submit" name="order" id="order" class="btn btn-primary">Order!</button>
     </form>
 
-    <footer>You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in food and drinks.</footer>
+    <footer><?php if (isset($_GET['street'],$_GET['streetnumber'],$_GET['city'],$_GET['zipcode'])) { ?> Your order has been received. <br>
+    It will be delivered to you address: <?=$_GET['street']?>, number: <?=$_GET['streetnumber']?> <br>
+    In <?=$_GET['city'] ?>, <?=$_GET['zipcode']?>. <?php } ?>
+    You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in food and drinks.</footer>
 </div>
 
 <style>
