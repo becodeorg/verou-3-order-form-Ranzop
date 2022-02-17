@@ -71,13 +71,13 @@
             <?php endforeach; ?>
         </fieldset>
 
-        <button type="submit" name="order" id="order" class="btn btn-primary">Order!</button>
+        <button type="submit" id="order" class="btn btn-primary">Order!</button>
     </form>
 
-    <footer><?php if (isset($_GET['street'],$_GET['streetnumber'],$_GET['city'],$_GET['zipcode'])) { ?> Your order has been received. <br>
+    <footer> <?php if ($totalValue < 0) { ?> You didn't order anything yet. <?php } ?> <?php if (isset($_GET['street'],$_GET['streetnumber'],$_GET['city'],$_GET['zipcode'])) { ?> Your order has been received. <br>
     It will be delivered to you address: <?=$_GET['street']?>, number: <?=$_GET['streetnumber']?> <br>
     In <?=$_GET['city'] ?>, <?=$_GET['zipcode']?>. <?php } ?>
-    You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in food and drinks.</footer>
+    <?php if ($totalValue > 0) { ?> You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in parties. <?php } ?> </footer>
 </div>
 
 <style>

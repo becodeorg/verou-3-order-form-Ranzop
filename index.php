@@ -71,7 +71,6 @@ $products = [
 // This function will display the contents of the multidimensional/associative array.
 /* foreach($products as $product)
 {
-
  foreach($product as $content)
 {
 echo $content ;
@@ -79,17 +78,44 @@ echo $content ;
 
 } */
 
+$parties = [];
+/* print_r($_GET); */
 
+/* function getParties ($orders) {
+for($i =0; $i < count($products); $i++ ) {
+    if (!empty($_GET)) {
 
-
-// TODO: Show an order confirmation when the user submits the form. This should contain the chosen products and delivery address.
-
-
-if (empty($_GET)){
+    print_r($_GET);
+    
+array_push($orders,
+$products[$i]['name'],
+$products[$i]['price']);
+    }
 }
-else if (!empty($_GET)){
+} */
 
-};
+// setting some global variables
+
+global $products, $totalValue;
+
+for ($i = 0; $i < count($products); $i++){
+    if(isset($_GET["products"][$i])) {
+   $parties[] = $products[$i]["name"];
+   $totalValue += $products[$i]["price"];
+}
+}
+echo $totalValue;
+print_r($parties);
+
+
+
+
+// this code can access the nested array; because of the print_r. 
+
+/* 
+print_r($products[1]['name']); */
+
+// ipv die 1 kan je een for loop maken en de correcte $_GET krijgen (want die geven ook een waarde van 1)
 
 /* echo $products['name']; */
 
@@ -105,7 +131,7 @@ if (!empty($_GET)) {
     echo $products['name'];
 } */
 
-$totalValue = 0;
+
 
 
 
