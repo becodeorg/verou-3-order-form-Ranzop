@@ -66,6 +66,30 @@ $products = [
 ];
 
 
+
+/* $arr=array(array("name"=>"neeraj","mob"=>342353534),
+           array("name"=>"rohit","mob"=>34235),
+           array("name"=>"deepak","mob"=>33534)
+          ); */
+
+echo '<table border="2">';
+echo '<tr>';
+echo '<td align="center">Name:</td>';
+echo '<td align="center">Fee:</td>';
+foreach($products as $k)
+{
+echo '<tr>';
+ foreach($k as $v)
+{
+echo '<td align="center">'.$v.'</td>';
+}
+echo '</tr>';
+}
+echo '</table>';
+
+
+
+
 /* echo $products['name']; */
 
 /*  if (empty($_GET)) {
