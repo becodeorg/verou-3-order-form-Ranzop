@@ -11,9 +11,10 @@
           rel="stylesheet"/>
     <title>Party Catalogue</title>
 </head> 
-<?php if ($emailPopup = true) { ?>
+<?php if ($emailPopup == true) { ?>
 <div class="alert alert-warning" role="alert">
   You didn't fill in the form correctly, please review your input.
+  <?= $emailError ?>
 </div>
 <?php } ?>
 <div class="container">

@@ -202,27 +202,33 @@ $cityError ="";
 $zipcodeError ="";
 $emailPopup = false;
 
-function checkForm ($emailPopup) {
+function checkOrder($x) {
 if (isset($_GET["order"])){
-    handleForm($emailPopup);
-}
-}
-function handleForm($emailPopup)
-{
-    echo $emailPopup;
     if (empty($_GET["email"])) {
         $emailError = "*Please fill in a valid e-mail address";
-    } else {
+        return $x = "true";
+       
+    } else if ($_GET["email"] == "") {
+        echo "yuk";
         $email = test_input($_GET["email"]);
         // check if e-mail address is well-formed
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $emailError = "*The email address is incorrect";
-        $emailPopup = true;
+        $x = true;
         }}  
-    
+        else {
+            echo "smuk";
+            $email = test_input($_GET["email"]);
+            // check if e-mail address is well-formed
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $emailError = "*The email address is incorrect";
+            $x = true;}  
+        }}}
+
+    /* 
     if (empty($_GET["street"])) {
         $streetError = "*Please fill in a valid address";
-    } else {
+    } else if ($_GET["street"] == "") {
         $street = test_input($_GET["street"]);
         $streetError = "*The given address is incorrect";
     } 
@@ -249,7 +255,25 @@ function handleForm($emailPopup)
         $zipcodeError = "*This is not a valid zipcode";
         }
     }  
+}}
+ */
+$emailPoPVerification = checkOrder($emailPopup);
+print_r ($emailPoPVerification);
+
+
+/* function checkForm ($x){
+    echo $x;
+if (isset($_GET["order"])){
+    handleForm($x);
 }
+}
+checkForm($emailPopup); */
+
+function handleForm()
+{
+   
+}
+
 
     // TODO: form related tasks (step 1)
 
