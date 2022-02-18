@@ -104,8 +104,8 @@ for ($i = 0; $i < count($products); $i++){
    $totalValue += $products[$i]["price"];
 }
 }
-echo $totalValue;
-print_r($parties);
+/* echo $totalValue;
+print_r($parties); */
 
 // This functions prints out all the products in a list (only the name of them).
 
@@ -202,63 +202,82 @@ $cityError ="";
 $zipcodeError ="";
 $emailPopup = false;
 
-function checkOrder($x) {
+$errorMessageArray = [
+    ['message' => '*Please fill in a valid e-mail address', 'target'=> 'email'],
+    ['message' => 'The email address is incorrect', 'target'=> 'email'],
+    ['message' => '*Please fill in a valid address', 'target'=> 'street'],
+    ['message' => "*The given address is incorrect", 'target'=> "street"],
+    ['message' => "*Please fill in a valid number", 'target'=> "streetnumber"],
+    ['message' => "*This is not a valid number", 'target'=> "streetnumber"],
+    ['message' => "*Please fill in a valid city", 'target'=> "city"],
+    ['message' => "*This is not a valid city", 'target'=> "city"],
+    ['message' => "*Please fill in a valid zipcode", 'target'=> "zipcode"],
+    ['message' => "*This is not a valid zipcode", 'target'=> "zipcode"]
+];
+
+function checkEmail($x) {
 if (isset($_GET["order"])){
     if (empty($_GET["email"])) {
-        $emailError = "*Please fill in a valid e-mail address";
-        return $x = "true";
+        return true;
        
     } else if ($_GET["email"] == "") {
-        echo "yuk";
         $email = test_input($_GET["email"]);
         // check if e-mail address is well-formed
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $emailError = "*The email address is incorrect";
-        $x = true;
+        return true;
         }}  
         else {
-            echo "smuk";
             $email = test_input($_GET["email"]);
-            // check if e-mail address is well-formed
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $emailError = "*The email address is incorrect";
-            $x = true;}  
-        }}}
+    // check if e-mail address is well-formed
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    return true;}}}}
 
-    /* 
+$emailPoPVerification = checkEmail($emailPopup);
+
+function checkStreet($x){
+    if (isset($_GET["order"])){
     if (empty($_GET["street"])) {
-        $streetError = "*Please fill in a valid address";
+    return $x = "*Please fill in a valid address";
     } else if ($_GET["street"] == "") {
-        $street = test_input($_GET["street"]);
-        $streetError = "*The given address is incorrect";
-    } 
-    if (empty($_GET["streetNumber"])) {
-        $streetNumberError = "*Please fill in a valid number";
-    } else {
-        $streetNumber = test_input($_GET["street"]);
-        // checking whether its an integer
-        if (!filter_var($streetNumber, FILTER_VALIDATE_INT)){
-        $streetError = "*This is not a valid number";
-        }
-    } 
-    if (empty($_GET["city"])) {
-        $cityError = "*Please fill in a valid city";
-    } else {
-        $city = test_input($_GET["street"]);
-        $streetError = "*This is not a valid city";
-    }  
-    if (empty($_GET["zipcode"])) {
-        $zipcodeError = "*Please fill in a valid zipcode";
-    } else {
-        $zipcode = test_input($_GET["zipcode"]);
-        if (!filter_var($zipcode, FILTER_VALIDATE_INT)){
-        $zipcodeError = "*This is not a valid zipcode";
-        }
-    }  
-}}
- */
-$emailPoPVerification = checkOrder($emailPopup);
-print_r ($emailPoPVerification);
+    $street = test_input($_GET["street"]);
+    return $x = "*The given address is incorrect";
+} 
+        
+$streetPoPVerification = checkStreet($streetError);
+
+
+        if (empty($_GET["streetNumber"])) {
+            $streetNumberError = "*Please fill in a valid number";
+        } else {
+            $streetNumber = test_input($_GET["street"]);
+            // checking whether its an integer
+            if (!filter_var($streetNumber, FILTER_VALIDATE_INT)){
+            $streetError = "*This is not a valid number";
+            }
+        } 
+        if (empty($_GET["city"])) {
+            $cityError = "*Please fill in a valid city";
+        } else {
+            $city = test_input($_GET["street"]);
+            $streetError = "*This is not a valid city";
+        }  
+        if (empty($_GET["zipcode"])) {
+            $zipcodeError = "*Please fill in a valid zipcode";
+        } else {
+            $zipcode = test_input($_GET["zipcode"]);
+            if (!filter_var($zipcode, FILTER_VALIDATE_INT)){
+            $zipcodeError = "*This is not a valid zipcode";
+            }
+        }  
+        }}
+
+
+       
+        echo $emailPoPVerification;
+        echo $zipcodeError;
+        
+         
+
 
 
 /* function checkForm ($x){

@@ -11,10 +11,15 @@
           rel="stylesheet"/>
     <title>Party Catalogue</title>
 </head> 
-<?php if ($emailPopup == true) { ?>
+<?php if ($emailPoPVerification == 1) { ?>
 <div class="alert alert-warning" role="alert">
-  You didn't fill in the form correctly, please review your input.
-  <?= $emailError ?>
+  You didn't fill in the form correctly, please review your input. <br>
+  <?php echo $errorMessageArray[0]['message'] ?> <br>
+  <?php echo $errorMessageArray[2]['message'] ?> <br>
+  <?php echo $errorMessageArray[4]['message'] ?> <br>
+  <?php echo $errorMessageArray[6]['message'] ?> <br>
+  <?php echo $errorMessageArray[8]['message'] ?> <br>
+
 </div>
 <?php } ?>
 <div class="container">
