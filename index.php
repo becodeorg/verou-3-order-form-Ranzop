@@ -107,10 +107,30 @@ for ($i = 0; $i < count($products); $i++){
 echo $totalValue;
 print_r($parties);
 
+// This functions prints out all the products in a list (only the name of them).
 
+/* function logProducts ($products) {
+    for ($i = 0; $i < count($products); $i++){
+    if(isset($_GET["products"][$i])) {
+    echo "<ol>";
+foreach ($products as $chosenProducts => $chosenProduct) {
+    echo "<li>";
+    print_r($chosenProduct['name']);
+    echo "</li>";
+}
+echo"</ol>";
+}}}
+logProducts ($products); */
 
+/* for ($i = 0; $i < count($products); $i++){
+    if(isset($_GET["products"][$i])) {
+        $partiesChoice[] = $products[$i]["name"];
+    }
+} */
 
-// this code can access the nested array; because of the print_r. 
+// print_r($partiesChoice);
+// this code can access the nested array; because of the print_r 
+//&as opposed to echo, which can only return a string
 
 /* 
 print_r($products[1]['name']); */
@@ -131,34 +151,121 @@ if (!empty($_GET)) {
     echo $products['name'];
 } */
 
+// Checking the form validation:
+
+// Step 1: create a function that adapts the input string to be suitable for our server to handle:
+    // trim removes white space before and after the string
+    // stripslashes removes a backslash from the string (if there are two, it leaves one)
+    // htmlspecialchars transforms special HTML entities, so that they are displayed on the browser, but not activated
+    // for example, it will show <b>bold</b> but not execute it, it converted it into only 'visual' elements
+    // basically, this is setting up the data to be processed by the filter_var function.
+
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+// Step 2: define as many variables as there is validation, and set their contents to an empty string.
+
+$email = $street = $streetNumber = $city = $zipCode = "";
+
+// Step 3: apply testinput to the input we get from users.
+// this returns errors, because the method is GET but, we don't have input yet
+// therefore it tries to 'trim' NULL, which gets errors.
+
+
+/* if (!empty($_GET)) {
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    $email = test_input($_GET["email"]);
+    $street = test_input($_GET["street"]);
+    $streetNumber = test_input($_GET["streetNumber"]);
+    $city = test_input($_GET["city"]);
+    $zipCode = test_input($_GET["zipCode"]);
+} 
+} */
+
+// Step 4: add span elements in correct places in html structure
+// Step 5: create contents of error messages
 
 
 
+/* validate(); */
+// !!!! Only run all the validation in the handleForm,
+// or, put a listener on the submit button
+// You will have to use isset() for the button, 
+// !empty will not work.
+$emailError ="";
+$streetError ="";
+$streetNumberError ="";
+$cityError ="";
+$zipcodeError ="";
+$emailPopup = false;
 
-
-function validate()
+function checkForm ($emailPopup) {
+if (isset($_GET["order"])){
+    handleForm($emailPopup);
+}
+}
+function handleForm($emailPopup)
 {
-    // This function will send a list of invalid fields back
-    return [];
+    echo $emailPopup;
+    if (empty($_GET["email"])) {
+        $emailError = "*Please fill in a valid e-mail address";
+    } else {
+        $email = test_input($_GET["email"]);
+        // check if e-mail address is well-formed
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailError = "*The email address is incorrect";
+        $emailPopup = true;
+        }}  
+    
+    if (empty($_GET["street"])) {
+        $streetError = "*Please fill in a valid address";
+    } else {
+        $street = test_input($_GET["street"]);
+        $streetError = "*The given address is incorrect";
+    } 
+    if (empty($_GET["streetNumber"])) {
+        $streetNumberError = "*Please fill in a valid number";
+    } else {
+        $streetNumber = test_input($_GET["street"]);
+        // checking whether its an integer
+        if (!filter_var($streetNumber, FILTER_VALIDATE_INT)){
+        $streetError = "*This is not a valid number";
+        }
+    } 
+    if (empty($_GET["city"])) {
+        $cityError = "*Please fill in a valid city";
+    } else {
+        $city = test_input($_GET["street"]);
+        $streetError = "*This is not a valid city";
+    }  
+    if (empty($_GET["zipcode"])) {
+        $zipcodeError = "*Please fill in a valid zipcode";
+    } else {
+        $zipcode = test_input($_GET["zipcode"]);
+        if (!filter_var($zipcode, FILTER_VALIDATE_INT)){
+        $zipcodeError = "*This is not a valid zipcode";
+        }
+    }  
 }
 
-function handleForm()
-{
     // TODO: form related tasks (step 1)
 
     // Validation (step 2)
-    $invalidFields = validate();
+/*     $invalidFields = validate();
     if (!empty($invalidFields)) {
         // TODO: handle errors
     } else {
         // TODO: handle successful submission
     }
-}
+ */
 
 // TODO: replace this if by an actual check
 $formSubmitted = false;
 if ($formSubmitted) {
     handleForm();
-}
+};
 
 require 'form-view.php';
