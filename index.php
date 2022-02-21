@@ -109,7 +109,7 @@ print_r($parties); */
 
 // This functions prints out all the products in a list (only the name of them).
 
-/* function logProducts ($products) {
+function logProducts ($products) {
     for ($i = 0; $i < count($products); $i++){
     if(isset($_GET["products"][$i])) {
     echo "<ol>";
@@ -120,7 +120,7 @@ foreach ($products as $chosenProducts => $chosenProduct) {
 }
 echo"</ol>";
 }}}
-logProducts ($products); */
+logProducts ($products); 
 
 /* for ($i = 0; $i < count($products); $i++){
     if(isset($_GET["products"][$i])) {

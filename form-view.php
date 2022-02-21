@@ -37,7 +37,7 @@
         </ul>
     </nav>
     */ ?>
-    <form method="get">
+    <form method="get" autocomplete="on" action ="<?php echo "index.php" ?>">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="email">E-mail:</label>
